@@ -5,7 +5,7 @@ fetch("https://randomuser.me/api/")
   });
 
 const setUser = ([result]) => {
-  console.log(result);
+  document.getElementById("loading").style.display = "none";
   let user = document.createElement("div");
   user.innerHTML = `
    <div
@@ -60,7 +60,7 @@ const setUser = ([result]) => {
           @${result.login.username}
         </p>
         <div class="text-center mt-2">
-          <h3 class="text-2xl text-slate-700 font-bold leading-normal mb-1">
+          <h3 id='title' class="text-2xl select-text text-slate-700 font-bold leading-normal mb-1">
            ${result.name.first} ${result.name.last}
           </h3>
 
@@ -73,14 +73,16 @@ const setUser = ([result]) => {
         <div class="mt-6 py-6 border-t border-slate-200 text-center">
           <div class="flex flex-wrap justify-center">
             <div class="w-full px-20">
-              <div class="text-slate-400 flex text-2xl justify-evenly mb-6">
+              <div id="icons" class="text-slate-400 flex text-2xl justify-evenly mb-6">
                 <i class="fa-solid fa-user icon"></i>
                 <i class="fa-solid fa-phone icon"></i>
                 <i class="fa-solid fa-envelope icon"></i>
                 <i class="fa-solid fa-cake-candles icon"></i>
               </div>
               <a
-                href="javascript:;"
+                href="https://twitter.com/${
+                  result.login.username
+                }" target="_blank"
                 class="ring-1 rounded-full px-4 pb-1 font-semibold ring-current bg-white hover:bg-blue-400 text-blue-400 hover:text-white"
                 >Connect User</a
               >
@@ -91,4 +93,22 @@ const setUser = ([result]) => {
     </div>
   `;
   document.getElementById("root").appendChild(user);
+  const title = user.querySelector("#title");
+  const x = user.querySelector("#icons");
+  x.addEventListener("mouseover", (e) => {
+    switch (e.target) {
+      case x.children[0]:
+        title.innerText = `${result.name.first} ${result.name.last}`;
+        break;
+      case x.children[1]:
+        title.innerText = result.phone;
+        break;
+      case x.children[2]:
+        title.innerText = result.email;
+        break;
+      case x.children[3]:
+        title.innerText = result.dob.date.slice(0, 10);
+        break;
+    }
+  });
 };
