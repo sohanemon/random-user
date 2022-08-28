@@ -89,8 +89,15 @@ const setUser = ([result]) => {
             </div>
           </div>
         </div>
+      </div> <button onclick="location.reload()"
+      type="button"
+      class="text-white bg-blue-400 hover:after:content-['Shuffle'] transition-all duration-300  hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 absolute -top-10 right-6"
+    >
+      <i class="fa-solid fa-shuffle"></i>
+    </button>
+    
       </div>
-    </div>
+     
   `;
   document.getElementById("root").appendChild(user);
   const title = user.querySelector("#title");
